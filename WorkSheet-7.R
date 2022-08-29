@@ -104,36 +104,39 @@ df
 
 
 #2.
-links
-links[1]
-
-piclink<-c(1:2)
+imglink<-c(1:2)
 for(i in 1:2){
-  imglink<-read_html(links[1])
-  imglink
-  imglink<-html_elements(imglink,".ipc-button.ipc-button--single-padding.ipc-button--center-align-content.ipc-button--default-height.ipc-button--core-baseAlt.ipc-button--theme-baseAlt.ipc-button--on-textPrimary.ipc-text-button.sc-f6306ea-2.dfHGIi")
-  imglink
-  pic<-html_elements(imglink,".poster")
-  pic
-  piclinks<-html_attr(pic,"src")
-  piclinks
-  piclink[i]<-paste("https://www.imdb.com/",piclinks,sep="")
+  pagehtml<-read_html(ratelinks[i])
+  pagehtml
+  html_elements(pagehtml,".subpage_title_block a .poster")
+  imglink[i]<-html_attr(html_elements(pagehtml,".subpage_title_block a .poster") , "src")
 }
-piclink[1]
+imglink
 
 #3.
 library(imager)
-poster <- load.image(piclink[1])
-poster
-plot(poster)
-
-
-for( i in 1:2){
-  poster <- load.image(piclink[i])
-  plot(poster)
+pixels<-c(1:2)
+for( k in 1:2){
+  img <- load.image(imglink[k])
+  plot(img)
+  
+  col.mat <- as.array(img[, ,1, ]) #3-D Array
+  col.mat
+  dimen<-dim(col.mat)
+  dist<-matrix(0,nrow=dimen[1],ncol=dimen[2])
+  
+  pixels[k]<-0
+  for(i in 1:nrow(dist)){
+    for(j in 1:ncol(dist)){
+      
+      if(norm((col.mat[i,j,]-c(0,0,0)),"2")==0.2){
+        print("Yes")
+        pixels[k]<-pixels[k]+1
+      }
+    }
+  }
 }
-
-
+pixels
 
 
 

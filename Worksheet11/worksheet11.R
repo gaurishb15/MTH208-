@@ -39,5 +39,33 @@ legend("topright",fill=c("yellow","blue"),legend = c("men","women"))
 plot(x=votes,y=ratings)
 
 #7.
-text(which(ratings>8.9),movies)
+i=1
+while(ratings[i]>8.9){
+  text(x=votes[i],y=ratings[i],movies[i])
+  i=i+1
+}
+
+#8.
+year<-dat$year
+year
+
+for(i in 1:250){
+  if(year[i]<1996){
+    plot(x=votes,y=ratings,col="green")
+  }
+  else{
+    plot(x=votes,y=ratings,col="blue")
+  }
+}
+
+year
+year_less<-year<1996
+year_less<-year[year_less]
+year_less
+year_more<-year[year>=1996]
+year_more
+year_diff<-data.frame(year_less,year_more)
+year_diff
+plot(votes,ratings,pch=16,col=year<1960,col="green")
+
 

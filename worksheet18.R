@@ -124,6 +124,78 @@ mat1<-matrix(runif(1e4),nrow=1e2,ncol=1e2)
 mat2<-matrix(runif(1e4),nrow=1e2,ncol=1e2)
 sum_of_matrices(mat1,mat2)
 
+#3.
+library(Rcpp)
+cppFunction('NumericVector addition(NumericMatrix A,NumericMatrix B){
+
+int n=A.nrow();
+int m=A.ncol();
+Rcout<<n;
+Rcout<<m;
+NumericVector res(n*m);
+for(int i=0;i<n;i++){
+for(int j=0;j<m;j++){
+res[i+j]=A(i,j)+B(i,j);
+}
+}
+
+res.attr("dim") = Dimension(n, m);
+return res;
+}')
+mat1<-matrix(runif(9),nrow=3,ncol=3)
+mat2<-matrix(runif(9),nrow=3,ncol=3)
+mat1
+mat2
+res_matrix<-addition(mat1,mat2)
+res_matrix
+
+
+#4.
+
+cppFunction('NumericVector col_mean(NumericMatrix A){
+
+int n=A.nrow();
+int m=A.ncol();
+NumericVector res(m);
+for(int i=0;i<m;i++){
+double ans=0;
+for(int j=0;j<n;j++){
+ans=ans+A(j,i);
+}
+res(i)=ans/n;
+}
+return res;
+}')
+
+library(rbenchmark)
+mat1<-matrix(runif(9),nrow=3,ncol=3)
+mat1
+benchmark({colMeans(mat1)},{col_mean(mat1)},replications=1e3)
+
+
+#5.
+cppFunction('LogicalVector check_sign(NumericVector A){
+int len=A.length();
+LogicalVector res(len);
+for(int i=0;i<len;i++){
+if(A(i)>0){
+res(i)=1;
+} else{
+res(i)=0;
+}
+}
+return res;
+}')
+vec<-numeric(length=1e1)
+vec<-runif(1e1)
+vec
+check_sign(vec)
+
+#6.
+
+
+
+
 
 
 

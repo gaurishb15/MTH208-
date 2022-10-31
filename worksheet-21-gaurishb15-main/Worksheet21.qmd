@@ -1,0 +1,136 @@
+---
+title: "MTH208a: Worksheet 21"
+format: beamer
+editor: visual
+header-includes:
+  - \usepackage{color}
+---
+
+## Statistical and Algorithmic Bias
+
+Last week we discussed Statistical Paradoxes and correlations. We witnessed, how important it is to know the quality of your data and to know which variables are missing.
+
+Today we discuss a different aspect: bias
+
+## Types of Bias
+
+The types of bias can roughly be categorized as:
+
+-   Selection Bias
+-   Survivorship Bias
+-   Omitted variable bias
+-   Recall bias
+-   Observer bias
+-   Funding bias
+
+## Example 1
+
+Consider estimating the average number of tweets in a day by tracking the tweets from 1pm - 3pm.
+
+Any problem with this?
+
+. . .
+
+This is \textcolor{blue}{selection bias}.
+
+When we collect data, we hope the *sample* collected accurately represents the *population.* Here we are only considering data from one part of the day!
+
+## Example 2
+
+Group 18 decides to survey all IIT Kanpur people on their favorite choice of food. They choose to make their survey available using a QR code.
+
+Any problem with this?
+
+. . .
+
+QR codes are new-age phenomenon and not everyone (especially older people) would be familiar with how to use it.
+
+This is again \textcolor{blue}{selection bias}.
+
+## Example 3
+
+Suppose you want to see how much does a 21 year old get on a 10th class Maths exam. You make all your classmates take the exam and calculate the average marks as a guess.
+
+. . .
+
+You *sample* is not representative of your *population.*
+
+## Example 4
+
+We enroll for a gym membership and attend for a few days. We see the same faces of many people who are fit, motivated and exercising everyday whenever we go to gym. After a few days we lose motivation whereas we see all the other people keep staying motivated! We conclude that we have a weaker resolve than other people :-(
+
+. . .
+
+What we didn\'t see was that many of the people who had enrolled for gym membership had also stopped turning up and we didn\'t see them.
+
+. . .
+
+This is \textcolor{blue}{surivorship bias}.
+
+Where else have we seen this bias?
+
+## Types of data collection
+
+There are two main ways of obtaining data:
+
+-   Experimental data
+
+-   Observational data
+
+. . .
+
+When collecting experimental data, we can safeguard against unknown behaviors and pursue to generate *representative data.*
+
+In observational data, we do not have the above luxury.
+
+## Why is handling bias important?
+
+Simple: if your data is biased, your conclusions will be biased!
+
+## Example 4
+
+Please do the following: Google search -
+
+"greatest musician of all time"
+
+Do you see any problems with the results? Repeat with "greatest actors of all time".
+
+## Example 5
+
+When YouTube launched their video upload app for iOS, between 5-10 percent of videos uploaded by users were upside-down. Why?
+
+. . .
+
+About 8-9% of the world population is left-handed people. Often, left handed people rotate their phone clock-wise instead of anti-clockwise for right-handed people.
+
+YouTube had an algorithm that detected a horizontal video and flipped it to display it vertically. This algorithm neglected that left-handed people rotated phones differently!
+
+## Exercise
+
+An experiment was done in an agriculture lab. Several variety of Barley were plotted in different plots of land. A JAZ spectrometer was taken to measure spectral reflectance from plots of Barley. The goal was to find
+
+*which wavelengths can differentiate between barley?*
+
+The machine essentially checks how much light is reflected back from the plants. Measurements were taken by graduate students over the span of two days from morning till afternoon.
+
+## Exercise
+
+You are given a `LowRepeated.csv` dataset in your repository. This data looks like:
+
+![](data_shot.png)
+
+## Exercise
+
+-   Date is mm/dd/yyyy
+
+-   Time of data collection
+
+-   Plot is the code for the plot of land (not useful to you right now)
+
+-   Wave (vertically down) is the wavelength
+
+-   Karl, Lacey, ... are names of the variety of Barley.
+
+Notice, that there are repeated measurements as well.
+
+**GOAL:** can you find a wavelength that can truly differentiate between the varieties of Barley?
